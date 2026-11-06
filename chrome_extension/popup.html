@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tab Video Capture</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 350px;
+      height: 200px;
+      background: #1a1a2e;
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    /* ── Title ── */
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Status ── */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #c0c0d0;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6b6b80;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .status-dot.recording {
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e88;
+      animation: pulse 1.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+
+    /* ── Session ID ── */
+    .session-id {
+      font-size: 10px;
+      color: #6b6b90;
+      letter-spacing: 0.3px;
+      min-height: 14px;
+    }
+
+    /* ── Buttons ── */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      color: #fff;
+    }
+
+    button:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+
+    button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    #startBtn {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+    }
+
+    #startBtn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+
+    #stopBtn {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+    }
+
+    #stopBtn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+  </style>
+</head>
+<body>
+  <div class="title">📹 Tab Video Capture</div>
+
+  <div class="status-row">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="status">Idle</span>
+  </div>
+
+  <div class="session-id" id="session-id"></div>
+
+  <div class="btn-row">
+    <button id="startBtn">▶ Start Capture</button>
+    <button id="stopBtn" disabled>⏹ Stop Capture</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
